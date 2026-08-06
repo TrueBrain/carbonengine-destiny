@@ -54,7 +54,7 @@ object Project : Project({
         untrustedBuildsSettings {
             defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
             enableLog = true
-            approvalRules = "group:All Users:1"
+            approvalRules = "group:PLATFORM:1"
             timeoutMinutes = 60
         }
     }
