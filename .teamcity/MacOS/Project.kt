@@ -48,6 +48,15 @@ object Project : Project({
     buildType(x64_Internal)
     buildType(x64_TrinityDev)
     buildType(x64_Release)
+
+    features {
+        untrustedBuildsSettings {
+            defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
+            enableLog = true
+            approvalRules = "group:CODE_REVIEWERS:1"
+            timeoutMinutes = 60
+        }
+    }
 })
 
 class CarbonBuildMacOS(buildName: String, configType: String, preset: String, agentArchitecture: String) : BuildType({
@@ -157,12 +166,6 @@ class CarbonBuildMacOS(buildName: String, configType: String, preset: String, ag
                 }
                 filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
             }
-        }
-        untrustedBuildsSettings {
-            defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
-            enableLog = true
-            approvalRules = "group:CODE_REVIEWERS:1"
-            timeoutMinutes = 60
         }
         commitStatusPublisher {
             publisher = github {

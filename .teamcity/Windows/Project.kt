@@ -36,6 +36,15 @@ object Project : Project({
     buildType(Internal)
     buildType(TrinityDev)
     buildType(Release)
+
+    features {
+        untrustedBuildsSettings {
+            defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
+            enableLog = true
+            approvalRules = "group:CODE_REVIEWERS:1"
+            timeoutMinutes = 60
+        }
+    }
 })
 
 
@@ -214,12 +223,7 @@ class CarbonBuildWindows(buildName: String, configType: String, preset: String) 
                 filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
             }
         }
-        untrustedBuildsSettings {
-            defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
-            enableLog = true
-            approvalRules = "group:CODE_REVIEWERS:1"
-            timeoutMinutes = 60
-        }
+
         commitStatusPublisher {
             publisher = github {
                 githubUrl = "https://api.github.com"
