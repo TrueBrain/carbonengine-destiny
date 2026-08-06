@@ -154,8 +154,14 @@ class CarbonBuildMacOS(buildName: String, configType: String, preset: String, ag
                 authType = token {
                     token = "%GITHUB_CARBON_PAT%"
                 }
-                filterAuthorRole = PullRequests.GitHubRoleFilter.MEMBER
+                filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
             }
+        }
+        untrustedBuildsSettings {
+            defaultAction = UntrustedBuildsSettings.DefaultAction.APPROVE
+            enableLog = true
+            approvalRules = "group:CODE_REVIEWERS:1"
+            timeoutMinutes = 60
         }
         commitStatusPublisher {
             publisher = github {
